@@ -7,31 +7,13 @@ bits 16
 org 0x100
     mov si, msghi
     call printsi
-
-    mov ax, 0B800h
-    mov es, ax
-    xor di, di
-    mov ax, 0720h
-    mov cx, 2000
-    rep stosw
-
-    mov ax, 40h
-    mov es, ax
-    
-    mov dl, [es:84h]
-    push dx
-
-    mov dl, [es:4Ah]
-    push dx
-
-    mov cx, 1
-    call printcx
-    mov si, x
+.1:
+    call kbpopascii
+    push ax
+    mov si, sp
     call printsi
-    mov cx, 1
-    call printcx
-
-    jmp halt
+    pop ax
+    jmp .1
 
 halt:
     hlt
@@ -44,3 +26,4 @@ break db 13, 10, 0
 
 %include "src/print.asm"
 %include "src/data.asm"
+%include "src/keyprocess.asm"
