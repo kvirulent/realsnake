@@ -51,3 +51,9 @@ run:
 	@LATEST=$$(ls -dt builds/* | head -n 1); \
 	echo Running $$LATEST; \
 	qemu-system-i386 -drive format=raw,file=$$LATEST/disk.img
+
+debug:
+	@LATEST=$$(ls -dt builds/* | head -n 1); \
+	echo Running $$LATEST; \
+	echo Running in DEBUG MODE! Execution will be STOPPED until a debugger is connected!; \
+	qemu-system-i386 -drive format=raw,file=$$LATEST/disk.img -s -S
