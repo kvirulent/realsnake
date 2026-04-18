@@ -23,7 +23,7 @@ kbpopkey:
 	jnz .key
 	mov ax, 0
 	ret
-.key
+.key:
 	mov ah, 00h
 	int 16h
 	ret
